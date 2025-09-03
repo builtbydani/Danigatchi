@@ -1,6 +1,6 @@
 use assert_cmd::prelude::*;
 use assert_fs::prelude::*;
-use chrono::{Local};
+use chrono::Local;
 use predicates::prelude::*;
 use std::process::Command;
 
@@ -24,7 +24,10 @@ fn commit_with_date(dir: &assert_fs::TempDir, date: chrono::NaiveDate, msg: &str
 
     // stage and commit with fixed dates so streak math is deterministic
     let mut add = std::process::Command::new("git");
-    add.current_dir(dir.path()).args(["add", "."]).status().unwrap();
+    add.current_dir(dir.path())
+        .args(["add", "."])
+        .status()
+        .unwrap();
 
     let mut commit = std::process::Command::new("git");
     commit

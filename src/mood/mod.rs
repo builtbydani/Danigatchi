@@ -72,9 +72,7 @@ pub fn detail_line(streak: i64, today: usize, in_repo: bool) -> Option<String> {
         return None;
     }
     let repo = crate::git::current_dir_name().unwrap_or_else(|| "?".into());
-    Some(format!(
-        "repo: {repo} | today: {today} | streak: {streak}"
-    ))
+    Some(format!("repo: {repo} | today: {today} | streak: {streak}"))
 }
 
 #[cfg(test)]
