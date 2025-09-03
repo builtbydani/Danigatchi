@@ -11,4 +11,3 @@ pub fn random_affirmation() -> String {
     let mut rng = rand::thread_rng();
     format!("💬 {}", pool.choose(&mut rng).unwrap())
 }
-
