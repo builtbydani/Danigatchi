@@ -10,10 +10,10 @@ fn main() {
     let (streak, commits_today, in_repo) = git_activity_summary(45);
     let hour = Local::now().hour();
 
-    let mood = choose_mood(streak as i64, commits_today, hour, &event, in_repo);
+    let mood = choose_mood(streak, commits_today, hour, &event, in_repo);
     let ascii = ascii_for(&mood);
-    let line1 = headline_for(&mood, streak as i64, commits_today, in_repo);
-    let line2 = detail_line(streak as i64, commits_today, in_repo);
+    let line1 = headline_for(&mood, streak, commits_today, in_repo);
+    let line2 = detail_line(streak, commits_today, in_repo);
     let aff = mood::copy::random_affirmation();
 
     println!("{ascii}");

@@ -63,7 +63,7 @@ pub fn headline_for(mood: &Mood, streak: i64, today: usize, _in_repo: bool) -> S
         ),
         Mood::Sleepy => "(=-_-=) zzz… it’s late witch… push one tiny commit then rest 🌙".into(),
         Mood::Sad => "(-﹏-)  no commits lately… summon a tiny PR spell?".into(),
-        Mood::Neutral => format!("(=^･ω･^=) keep going! streak: {}", streak),
+        Mood::Neutral => format!("(=^･ω･^=) keep going! streak: {streak}"),
     }
 }
 
@@ -73,8 +73,7 @@ pub fn detail_line(streak: i64, today: usize, in_repo: bool) -> Option<String> {
     }
     let repo = crate::git::current_dir_name().unwrap_or_else(|| "?".into());
     Some(format!(
-        "repo: {} | today: {} | streak: {}",
-        repo, today, streak
+        "repo: {repo} | today: {today} | streak: {streak}"
     ))
 }
 

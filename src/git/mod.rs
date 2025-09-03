@@ -8,7 +8,7 @@ pub(crate) fn compute_streak_from_dates(dates: &HashSet<NaiveDate>, today: Naive
     let mut d = today;
     while dates.contains(&d) {
         streak += 1;
-        d = d - Duration::days(1);
+        d -= Duration::days(1);
     }
     streak
 }
@@ -35,7 +35,7 @@ fn git_dates(days: i64) -> Vec<NaiveDate> {
     let out = Command::new("git")
         .args([
             "log",
-            &format!("--since={} days ago", days),
+            &format!("--since={days} days ago"),
             "--date=short",
             "--pretty=%ad",
         ])
