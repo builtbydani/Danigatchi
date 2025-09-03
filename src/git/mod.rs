@@ -41,14 +41,14 @@ fn git_dates(days: i64) -> Vec<NaiveDate> {
         ])
         .output();
 
-    if let Ok(o) = out {
-        if o.status.success() {
-            let s = String::from_utf8_lossy(&o.stdout);
-            return s
-                .lines()
-                .filter_map(|l| NaiveDate::parse_from_str(l.trim(), "%Y-%m-%d").ok())
-                .collect();
-        }
+    if let Ok(o) = out
+        && o.status.success()
+    {
+        let s = String::from_utf8_lossy(&o.stdout);
+        return s
+            .lines()
+            .filter_map(|l| NaiveDate::parse_from_str(l.trim(), "%Y-%m-%d").ok())
+            .collect();
     }
     vec![]
 }

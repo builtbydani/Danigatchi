@@ -9,7 +9,7 @@ fn init_git_repo(dir: &assert_fs::TempDir) {
         let mut c = std::process::Command::new("git");
         c.current_dir(dir.path()).args(args);
         let out = c.output().expect("git failed");
-        assert!(out.status.success(), "git {:?} failed: {:?}", args, out);
+        assert!(out.status.success(), "git {args:?} failed: {out:?}");
     };
     git(&["init", "-q"]);
     git(&["config", "user.name", "Test User"]);
@@ -20,7 +20,7 @@ fn commit_with_date(dir: &assert_fs::TempDir, date: chrono::NaiveDate, msg: &str
     let file = dir.child("file.txt");
 
     // overwrite (or create) the file with new content each commit
-    file.write_str(&format!("{}\n", msg)).unwrap();
+    file.write_str(&format!("{msg}\n")).unwrap();
 
     // stage and commit with fixed dates so streak math is deterministic
     let mut add = std::process::Command::new("git");
@@ -32,8 +32,8 @@ fn commit_with_date(dir: &assert_fs::TempDir, date: chrono::NaiveDate, msg: &str
     let mut commit = std::process::Command::new("git");
     commit
         .current_dir(dir.path())
-        .env("GIT_AUTHOR_DATE", format!("{} 12:00:00", date))
-        .env("GIT_COMMITTER_DATE", format!("{} 12:00:00", date))
+        .env("GIT_AUTHOR_DATE", format!("{date} 12:00:00"))
+        .env("GIT_COMMITTER_DATE", format!("{date} 12:00:00"))
         .args(["commit", "-m", msg])
         .status()
         .expect("git commit failed");
